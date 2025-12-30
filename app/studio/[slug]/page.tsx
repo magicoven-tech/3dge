@@ -32,9 +32,9 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
     const [selectedColor, setSelectedColor] = useState(product?.colors[0] || "black");
 
     // Text Config State
-    const [position, setPosition] = useState({ x: -0.35, y: -0.02, z: -0.3 });
+    const [position, setPosition] = useState({ x: 0, y: 0.1, z: 0.25 });
     const [rotation, setRotation] = useState({ x: 0, y: 0, z: 0 });
-    const [fontSize, setFontSize] = useState(0.35);
+    const [fontSize, setFontSize] = useState(0.1);
 
     const { addToCart } = useCart();
     const [isAdding, setIsAdding] = useState(false);
@@ -124,7 +124,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                                 <span className="text-[10px] text-muted-foreground font-mono">{position.x?.toFixed(2) ?? "0.00"}</span>
                                             </div>
                                             <Slider
-                                                min={-2} max={2} step={0.01}
+                                                min={-1} max={1} step={0.005}
                                                 value={[position.x ?? 0]}
                                                 onValueChange={(val) => updatePosition('x', (val as number[])[0])}
                                             />
@@ -135,7 +135,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                                 <span className="text-[10px] text-muted-foreground font-mono">{position.y?.toFixed(2) ?? "0.00"}</span>
                                             </div>
                                             <Slider
-                                                min={-2} max={2} step={0.01}
+                                                min={-1} max={1} step={0.005}
                                                 value={[position.y ?? 0]}
                                                 onValueChange={(val) => updatePosition('y', (val as number[])[0])}
                                             />
@@ -146,7 +146,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                                 <span className="text-[10px] text-muted-foreground font-mono">{position.z?.toFixed(2) ?? "0.00"}</span>
                                             </div>
                                             <Slider
-                                                min={-2} max={2} step={0.01}
+                                                min={-1} max={1} step={0.005}
                                                 value={[position.z ?? 0]}
                                                 onValueChange={(val) => updatePosition('z', (val as number[])[0])}
                                             />
@@ -201,8 +201,8 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                             <span className="text-[10px] text-muted-foreground font-mono">{fontSize?.toFixed(2) ?? "1.00"}</span>
                                         </div>
                                         <Slider
-                                            min={0.1} max={2} step={0.05}
-                                            value={[fontSize ?? 1]}
+                                            min={0.01} max={0.5} step={0.005}
+                                            value={[fontSize ?? 0.1]}
                                             onValueChange={(val) => setFontSize((val as number[])[0])}
                                         />
                                     </div>

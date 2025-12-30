@@ -37,21 +37,27 @@ function LighterModel({ text, color, model, textConfig }: LighterSceneProps) {
 
     return (
         <group dispose={null}>
-            <Center>
-                <primitive object={clonedScene} scale={0.5} />
+            <Center top>
+                <primitive object={clonedScene} scale={1} />
             </Center>
-            <Text3D
-                font="https://unpkg.com/three@0.160.0/examples/fonts/helvetiker_bold.typeface.json"
+
+            <group
                 position={[textConfig.position.x, textConfig.position.y, textConfig.position.z]}
                 rotation={[textConfig.rotation.x, textConfig.rotation.y, textConfig.rotation.z]}
-                size={textConfig.fontSize}
-                height={0.4}
-                curveSegments={12}
-                bevelEnabled={false}
             >
-                {text || "Seu nome"}
-                <meshStandardMaterial color="#cc5500" roughness={0.6} />
-            </Text3D>
+                <Center>
+                    <Text3D
+                        font="https://unpkg.com/three@0.160.0/examples/fonts/helvetiker_bold.typeface.json"
+                        size={textConfig.fontSize}
+                        height={0.1}
+                        curveSegments={12}
+                        bevelEnabled={false}
+                    >
+                        {text || "Seu nome"}
+                        <meshStandardMaterial color="#ffffff" roughness={0.3} metalness={0.8} />
+                    </Text3D>
+                </Center>
+            </group>
         </group>
     )
 }
@@ -59,19 +65,19 @@ function LighterModel({ text, color, model, textConfig }: LighterSceneProps) {
 export function LighterScene(props: LighterSceneProps) {
     return (
         <div className="w-full h-full bg-stone-100 dark:bg-stone-900 cursor-move relative">
-            <Canvas shadows camera={{ position: [0, 0, 120], fov: 45 }}>
-                <ambientLight intensity={0.1} />
-                <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
-                <Environment preset="studio" />
+            <Canvas shadows camera={{ position: [0, 0, 5], fov: 45 }}>
+                <ambientLight intensity={0.5} />
+                <pointLight position={[10, 10, 10]} intensity={1} />
+                <directionalLight position={[-10, 10, 5]} intensity={1} castShadow />
+                <Environment preset="city" />
 
                 <LighterModel {...props} />
 
                 <OrbitControls
-                    minPolarAngle={Math.PI / 3}
-                    maxPolarAngle={Math.PI / 1.8}
+                    enablePan={false}
                     enableZoom={true}
-                    maxDistance={200}
-                    minDistance={5}
+                    maxDistance={10}
+                    minDistance={2}
                 />
             </Canvas>
         </div>
