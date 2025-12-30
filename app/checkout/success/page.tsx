@@ -55,16 +55,7 @@ export default function CheckoutSuccessPage() {
                         return (
                             <Canvas key={item.id} gl={{ preserveDrawingBuffer: true }}>
                                 <StlExporter
-                                    product={{ model: item.image ? "/assets/3d/phone.glb" : item.image, name: item.name }} // Fallback model path hack for this demo if needed, but ideally item has model path
-                                    // Wait, item doesn't have model path in CartItem type! We need to fix that or use a lookup.
-                                    // CartItem doesn't store 'model' path. 
-                                    // Fix: We need to pass valid model path. For the demo, we know it's the phone holder.
-                                    // Better fix: Add `model` to CartItem type in next step or lookup here.
-                                    // Quick fix for demo: All products use the same model in this mock?
-                                    // Actually, let's look at `item`. `getProductBySlug` isn't available easily without slug.
-                                    // I'll assume '/assets/3d/phone.glb' for the demo or update CartItem.
-                                    // Let's check CartItem type again. It does NOT have model.
-                                    // I will update CartContext one more time to include `model` string.
+                                    product={{ model: item.model, name: item.name }}
                                     textConfig={{
                                         text: item.customText,
                                         position: item.textConfig.position,
