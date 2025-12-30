@@ -32,9 +32,9 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
     const [selectedColor, setSelectedColor] = useState(product?.colors[0] || "black");
 
     // Text Config State
-    const [position, setPosition] = useState({ x: 0, y: 0, z: 1.5 });
-    const [rotation, setRotation] = useState({ x: 0, y: 0, z: 0 });
-    const [fontSize, setFontSize] = useState(1.5);
+    const [position, setPosition] = useState({ x: "0", y: "0", z: "1.5" });
+    const [rotation, setRotation] = useState({ x: "0", y: "0", z: "0" });
+    const [fontSize, setFontSize] = useState("1.5");
 
     const { addToCart } = useCart();
     const [isAdding, setIsAdding] = useState(false);
@@ -50,8 +50,14 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
             name: product.name,
             price: product.price,
             image: product.image,
+            model: product.model,
             customText,
             color: selectedColor,
+            textConfig: {
+                position: { x: parseFloat(position.x) || 0, y: parseFloat(position.y) || 0, z: parseFloat(position.z) || 0 },
+                rotation: { x: parseFloat(rotation.x) || 0, y: parseFloat(rotation.y) || 0, z: parseFloat(rotation.z) || 0 },
+                fontSize: parseFloat(fontSize) || 0.5
+            },
         });
         setTimeout(() => setIsAdding(false), 1000);
     };
@@ -59,10 +65,10 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
     const relatedProducts = PRODUCTS.filter(p => p.id !== product.id);
 
     // Helper for sliders
-    const updatePosition = (axis: 'x' | 'y' | 'z', value: number) => {
+    const updatePosition = (axis: 'x' | 'y' | 'z', value: string) => {
         setPosition(prev => ({ ...prev, [axis]: value }));
     };
-    const updateRotation = (axis: 'x' | 'y' | 'z', value: number) => {
+    const updateRotation = (axis: 'x' | 'y' | 'z', value: string) => {
         setRotation(prev => ({ ...prev, [axis]: value }));
     };
 
@@ -81,7 +87,11 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                         image={product.image}
                         color={selectedColor === 'stone' ? '#d6d3d1' : selectedColor}
                         model={product.model}
-                        textConfig={{ position, rotation, fontSize }}
+                        textConfig={{
+                            position: { x: parseFloat(position.x) || 0, y: parseFloat(position.y) || 0, z: parseFloat(position.z) || 0 },
+                            rotation: { x: parseFloat(rotation.x) || 0, y: parseFloat(rotation.y) || 0, z: parseFloat(rotation.z) || 0 },
+                            fontSize: parseFloat(fontSize) || 0.5
+                        }}
                     />
                 </div>
 
@@ -118,7 +128,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                         type="number"
                                         min={0.5} max={5} step={0.1}
                                         value={fontSize}
-                                        onChange={(e) => setFontSize(parseFloat(e.target.value))}
+                                        onChange={(e) => setFontSize(e.target.value)}
                                         className="h-8 font-mono"
                                     />
                                 </div>
@@ -128,7 +138,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                         type="number"
                                         min={-6} max={6} step={0.1}
                                         value={position.x}
-                                        onChange={(e) => updatePosition('x', parseFloat(e.target.value))}
+                                        onChange={(e) => updatePosition('x', e.target.value)}
                                         className="h-8 font-mono"
                                     />
                                 </div>
@@ -138,7 +148,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                         type="number"
                                         min={-6} max={6} step={0.1}
                                         value={position.y}
-                                        onChange={(e) => updatePosition('y', parseFloat(e.target.value))}
+                                        onChange={(e) => updatePosition('y', e.target.value)}
                                         className="h-8 font-mono"
                                     />
                                 </div>
@@ -148,7 +158,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                         type="number"
                                         min={-10} max={10} step={0.1}
                                         value={position.z}
-                                        onChange={(e) => updatePosition('z', parseFloat(e.target.value))}
+                                        onChange={(e) => updatePosition('z', e.target.value)}
                                         className="h-8 font-mono"
                                     />
                                 </div>
@@ -161,7 +171,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                         type="number"
                                         min={-6.28} max={6.28} step={0.1}
                                         value={rotation.x}
-                                        onChange={(e) => updateRotation('x', parseFloat(e.target.value))}
+                                        onChange={(e) => updateRotation('x', e.target.value)}
                                         className="h-8 font-mono"
                                     />
                                 </div>
@@ -171,7 +181,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                         type="number"
                                         min={-6.28} max={6.28} step={0.1}
                                         value={rotation.y}
-                                        onChange={(e) => updateRotation('y', parseFloat(e.target.value))}
+                                        onChange={(e) => updateRotation('y', e.target.value)}
                                         className="h-8 font-mono"
                                     />
                                 </div>
@@ -181,7 +191,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                         type="number"
                                         min={-6.28} max={6.28} step={0.1}
                                         value={rotation.z}
-                                        onChange={(e) => updateRotation('z', parseFloat(e.target.value))}
+                                        onChange={(e) => updateRotation('z', e.target.value)}
                                         className="h-8 font-mono"
                                     />
                                 </div>

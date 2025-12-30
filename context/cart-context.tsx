@@ -10,8 +10,14 @@ export type CartItem = {
     name: string;
     price: number;
     image: string;
+    model: string;
     customText: string;
     color: string;
+    textConfig: {
+        position: { x: number; y: number; z: number };
+        rotation: { x: number; y: number; z: number };
+        fontSize: number;
+    };
 };
 
 type CartContextType = {
