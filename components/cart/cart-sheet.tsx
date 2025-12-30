@@ -2,6 +2,7 @@
 
 import { ShoppingBag, Trash } from "@phosphor-icons/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useCart } from "@/context/cart-context";
 import {
     Sheet,
@@ -87,9 +88,11 @@ export function CartSheet() {
                             <span className="text-muted-foreground">Subtotal</span>
                             <span className="font-bold text-lg">${total.toFixed(2)}</span>
                         </div>
-                        <Button className="w-full text-base py-6 font-bold tracking-wide" size="lg">
-                            CHECKOUT
-                        </Button>
+                        <Link href="/checkout" className="w-full">
+                            <Button className="w-full text-base py-6 font-bold tracking-wide" size="lg">
+                                CHECKOUT
+                            </Button>
+                        </Link>
                     </div>
                 )}
             </SheetContent>

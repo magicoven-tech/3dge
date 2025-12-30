@@ -72,12 +72,9 @@ function LighterModel({ text, color, model, textConfig }: ModelProps) {
                         >
                             {text}
                             <meshStandardMaterial
-                                color="#ffffff"
+                                color="#eeeeee"
                                 roughness={0.3}
-                                metalness={0.8}
-                                depthTest={false} /* Always render on top */
-                                depthWrite={false}
-                                toneMapped={false}
+                                metalness={0.5}
                             />
                         </Text3D>
                     )}
