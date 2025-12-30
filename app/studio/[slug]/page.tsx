@@ -124,7 +124,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                                 <span className="text-[10px] text-muted-foreground font-mono">{position.x?.toFixed(2) ?? "0.00"}</span>
                                             </div>
                                             <Slider
-                                                min={-1} max={1} step={0.005}
+                                                min={-6} max={6} step={0.01}
                                                 value={[position.x ?? 0]}
                                                 onValueChange={(val) => updatePosition('x', (val as number[])[0])}
                                             />
@@ -135,7 +135,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                                 <span className="text-[10px] text-muted-foreground font-mono">{position.y?.toFixed(2) ?? "0.00"}</span>
                                             </div>
                                             <Slider
-                                                min={-1} max={1} step={0.005}
+                                                min={-6} max={6} step={0.01}
                                                 value={[position.y ?? 0]}
                                                 onValueChange={(val) => updatePosition('y', (val as number[])[0])}
                                             />
@@ -146,7 +146,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                                 <span className="text-[10px] text-muted-foreground font-mono">{position.z?.toFixed(2) ?? "0.00"}</span>
                                             </div>
                                             <Slider
-                                                min={-1} max={1} step={0.005}
+                                                min={-6} max={6} step={0.01}
                                                 value={[position.z ?? 0]}
                                                 onValueChange={(val) => updatePosition('z', (val as number[])[0])}
                                             />
