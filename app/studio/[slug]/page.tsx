@@ -48,7 +48,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
     return (
         <div className="flex flex-col md:flex-row h-[calc(100vh-4rem)] overflow-hidden">
             {/* LEFT: Preview Area (Sticky/Fixed on Desktop) */}
-            <div className="w-full md:w-1/2 bg-stone-100 dark:bg-stone-900 flex flex-col items-center justify-center p-8 relative overflow-hidden">
+            <div className="w-full md:w-1/2 bg-stone-100 dark:bg-stone-900 flex flex-col items-center justify-center p-0 relative overflow-hidden">
                 <Link href="/" className="absolute top-4 left-4 md:top-8 md:left-8 flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors z-20">
                     <CaretLeft size={20} />
                     <span className="font-bold text-sm">BACK</span>
