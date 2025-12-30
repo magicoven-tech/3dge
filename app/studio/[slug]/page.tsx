@@ -32,9 +32,9 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
     const [selectedColor, setSelectedColor] = useState(product?.colors[0] || "black");
 
     // Text Config State
-    const [position, setPosition] = useState({ x: 0, y: 0.1, z: 0.25 });
+    const [position, setPosition] = useState({ x: 0, y: 0, z: 1.5 });
     const [rotation, setRotation] = useState({ x: 0, y: 0, z: 0 });
-    const [fontSize, setFontSize] = useState(0.1);
+    const [fontSize, setFontSize] = useState(1.5);
 
     const { addToCart } = useCart();
     const [isAdding, setIsAdding] = useState(false);
@@ -79,7 +79,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                     <LighterPreview
                         text={customText}
                         image={product.image}
-                        color={selectedColor}
+                        color={selectedColor === 'stone' ? '#d6d3d1' : selectedColor}
                         model={product.model}
                         textConfig={{ position, rotation, fontSize }}
                     />
@@ -103,7 +103,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                         placeholder="YOUR TEXT"
                                         maxLength={12}
                                         value={customText}
-                                        onChange={(e) => setCustomText(e.target.value)}
+                                        onChange={(e) => setCustomText(e.target.value.toUpperCase())}
                                         className="h-14 text-lg font-mono uppercase tracking-widest border-2 border-stone-200 focus-visible:ring-primary focus-visible:border-primary transition-all"
                                     />
                                     <div className="flex justify-between text-xs text-muted-foreground">
@@ -112,101 +112,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                     </div>
                                 </div>
 
-                                {/* Text Positioning Controls */}
-                                <div className="space-y-4 pt-4 border-t border-stone-100">
-                                    <h3 className="uppercase font-bold text-xs tracking-widest text-muted-foreground mb-4">Text Adjustment</h3>
 
-                                    {/* Position Group */}
-                                    <div className="space-y-4">
-                                        <div className="space-y-2">
-                                            <div className="flex justify-between items-center">
-                                                <Label className="text-xs font-semibold">Horizontal (X)</Label>
-                                                <span className="text-[10px] text-muted-foreground font-mono">{position.x?.toFixed(2) ?? "0.00"}</span>
-                                            </div>
-                                            <Slider
-                                                min={-6} max={6} step={0.01}
-                                                value={[position.x ?? 0]}
-                                                onValueChange={(val) => updatePosition('x', (val as number[])[0])}
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <div className="flex justify-between items-center">
-                                                <Label className="text-xs font-semibold">Vertical (Y)</Label>
-                                                <span className="text-[10px] text-muted-foreground font-mono">{position.y?.toFixed(2) ?? "0.00"}</span>
-                                            </div>
-                                            <Slider
-                                                min={-6} max={6} step={0.01}
-                                                value={[position.y ?? 0]}
-                                                onValueChange={(val) => updatePosition('y', (val as number[])[0])}
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <div className="flex justify-between items-center">
-                                                <Label className="text-xs font-semibold">Depth (Z)</Label>
-                                                <span className="text-[10px] text-muted-foreground font-mono">{position.z?.toFixed(2) ?? "0.00"}</span>
-                                            </div>
-                                            <Slider
-                                                min={-6} max={6} step={0.01}
-                                                value={[position.z ?? 0]}
-                                                onValueChange={(val) => updatePosition('z', (val as number[])[0])}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="h-px bg-stone-100 my-4" />
-
-                                    {/* Rotation Group */}
-                                    <div className="space-y-4">
-                                        <div className="space-y-2">
-                                            <div className="flex justify-between items-center">
-                                                <Label className="text-xs font-semibold">Rotate X</Label>
-                                                <span className="text-[10px] text-muted-foreground font-mono">{rotation.x?.toFixed(2) ?? "0.00"}</span>
-                                            </div>
-                                            <Slider
-                                                min={-3.14} max={3.14} step={0.01}
-                                                value={[rotation.x ?? 0]}
-                                                onValueChange={(val) => updateRotation('x', (val as number[])[0])}
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <div className="flex justify-between items-center">
-                                                <Label className="text-xs font-semibold">Rotate Y</Label>
-                                                <span className="text-[10px] text-muted-foreground font-mono">{rotation.y?.toFixed(2) ?? "0.00"}</span>
-                                            </div>
-                                            <Slider
-                                                min={-3.14} max={3.14} step={0.01}
-                                                value={[rotation.y ?? 0]}
-                                                onValueChange={(val) => updateRotation('y', (val as number[])[0])}
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <div className="flex justify-between items-center">
-                                                <Label className="text-xs font-semibold">Rotate Z</Label>
-                                                <span className="text-[10px] text-muted-foreground font-mono">{rotation.z?.toFixed(2) ?? "0.00"}</span>
-                                            </div>
-                                            <Slider
-                                                min={-3.14} max={3.14} step={0.01}
-                                                value={[rotation.z ?? 0]}
-                                                onValueChange={(val) => updateRotation('z', (val as number[])[0])}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="h-px bg-stone-100 my-4" />
-
-                                    {/* Size Group */}
-                                    <div className="space-y-2">
-                                        <div className="flex justify-between items-center">
-                                            <Label className="text-xs font-semibold">Font Size</Label>
-                                            <span className="text-[10px] text-muted-foreground font-mono">{fontSize?.toFixed(2) ?? "1.00"}</span>
-                                        </div>
-                                        <Slider
-                                            min={0.01} max={0.5} step={0.005}
-                                            value={[fontSize ?? 0.1]}
-                                            onValueChange={(val) => setFontSize((val as number[])[0])}
-                                        />
-                                    </div>
-                                </div>
 
                                 {/* Color Selection */}
                                 <div className="space-y-3">
@@ -264,7 +170,7 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                                 <Card className="border-none shadow-none bg-transparent hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors">
                                                     <CardContent className="p-4 flex flex-col items-center text-center space-y-2">
                                                         <div className="relative w-24 h-24 bg-stone-200 dark:bg-stone-800 rounded-md overflow-hidden">
-                                                            <Image src={p.image} alt={p.name} fill className="object-contain p-2" />
+                                                            <Image src={p.image} alt={p.name} fill sizes="100px" className="object-contain p-2" />
                                                         </div>
                                                         <div className="space-y-1">
                                                             <p className="text-xs font-bold uppercase truncate max-w-[120px]">{p.name}</p>
