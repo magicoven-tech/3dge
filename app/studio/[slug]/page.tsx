@@ -112,7 +112,79 @@ export default function StudioPage({ params }: { params: Promise<{ slug: string 
                                     </div>
                                 </div>
 
+                                <div className="flex items-center gap-4 pt-4 border-t border-stone-100">
+                                    <Label className="text-xs font-semibold whitespace-nowrap min-w-16">Size</Label>
+                                    <Input
+                                        type="number"
+                                        min={0.5} max={5} step={0.1}
+                                        value={fontSize}
+                                        onChange={(e) => setFontSize(parseFloat(e.target.value))}
+                                        className="h-8 font-mono"
+                                    />
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <Label className="text-xs font-semibold whitespace-nowrap min-w-16">Pos X</Label>
+                                    <Input
+                                        type="number"
+                                        min={-6} max={6} step={0.1}
+                                        value={position.x}
+                                        onChange={(e) => updatePosition('x', parseFloat(e.target.value))}
+                                        className="h-8 font-mono"
+                                    />
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <Label className="text-xs font-semibold whitespace-nowrap min-w-16">Pos Y</Label>
+                                    <Input
+                                        type="number"
+                                        min={-6} max={6} step={0.1}
+                                        value={position.y}
+                                        onChange={(e) => updatePosition('y', parseFloat(e.target.value))}
+                                        className="h-8 font-mono"
+                                    />
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <Label className="text-xs font-semibold whitespace-nowrap min-w-16">Pos Z</Label>
+                                    <Input
+                                        type="number"
+                                        min={-10} max={10} step={0.1}
+                                        value={position.z}
+                                        onChange={(e) => updatePosition('z', parseFloat(e.target.value))}
+                                        className="h-8 font-mono"
+                                    />
+                                </div>
 
+                                <div className="h-px bg-stone-100 my-4" />
+
+                                <div className="flex items-center gap-4">
+                                    <Label className="text-xs font-semibold whitespace-nowrap min-w-16">Rot X</Label>
+                                    <Input
+                                        type="number"
+                                        min={-6.28} max={6.28} step={0.1}
+                                        value={rotation.x}
+                                        onChange={(e) => updateRotation('x', parseFloat(e.target.value))}
+                                        className="h-8 font-mono"
+                                    />
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <Label className="text-xs font-semibold whitespace-nowrap min-w-16">Rot Y</Label>
+                                    <Input
+                                        type="number"
+                                        min={-6.28} max={6.28} step={0.1}
+                                        value={rotation.y}
+                                        onChange={(e) => updateRotation('y', parseFloat(e.target.value))}
+                                        className="h-8 font-mono"
+                                    />
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <Label className="text-xs font-semibold whitespace-nowrap min-w-16">Rot Z</Label>
+                                    <Input
+                                        type="number"
+                                        min={-6.28} max={6.28} step={0.1}
+                                        value={rotation.z}
+                                        onChange={(e) => updateRotation('z', parseFloat(e.target.value))}
+                                        className="h-8 font-mono"
+                                    />
+                                </div>
 
                                 {/* Color Selection */}
                                 <div className="space-y-3">
