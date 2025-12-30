@@ -1,7 +1,7 @@
 "use client"
 
 import { Canvas } from "@react-three/fiber"
-import { Environment, OrbitControls, Center, Text3D, useGLTF } from "@react-three/drei"
+import { Environment, OrbitControls, Center, Text3D, useGLTF, Resize, GizmoHelper, GizmoViewcube, ContactShadows } from "@react-three/drei"
 import { useEffect, useMemo } from "react"
 import * as THREE from "three"
 
@@ -38,7 +38,9 @@ function LighterModel({ text, color, model, textConfig }: LighterSceneProps) {
     return (
         <group dispose={null}>
             <Center top>
-                <primitive object={clonedScene} scale={1} />
+                <Resize scale={10}>
+                    <primitive object={clonedScene} />
+                </Resize>
             </Center>
 
             <group
@@ -66,19 +68,38 @@ export function LighterScene(props: LighterSceneProps) {
     return (
         <div className="w-full h-full bg-stone-100 dark:bg-stone-900 cursor-move relative">
             <Canvas shadows camera={{ position: [0, 0, 5], fov: 45 }}>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} intensity={1} />
-                <directionalLight position={[-10, 10, 5]} intensity={1} castShadow />
+                {/* CAD-like Lights & Environment */}
+                <ambientLight intensity={0.7} />
+                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
                 <Environment preset="city" />
 
-                <LighterModel {...props} />
+                <group position={[0, -0.5, 0]}>
+                    <LighterModel {...props} />
+                    <ContactShadows position={[0, -0.05, 0]} opacity={0.4} scale={10} blur={2.5} far={4} />
+                </group>
 
                 <OrbitControls
-                    enablePan={false}
-                    enableZoom={true}
-                    maxDistance={10}
+                    makeDefault
+                    enableDamping
+                    dampingFactor={0.05}
+                    rotateSpeed={0.6}
+                    enablePan={true}
+                    panSpeed={0.6}
                     minDistance={2}
+                    maxDistance={20}
                 />
+
+                {/* Shapr3D-like Navigation Gizmo */}
+                <GizmoHelper alignment="bottom-right" margin={[80, 80]}>
+                    <GizmoViewcube
+                        font="16px Inter"
+                        opacity={0.85}
+                        color="white"
+                        hoverColor="#d6d3d1"
+                        textColor="black"
+                        strokeColor="#d6d3d1"
+                    />
+                </GizmoHelper>
             </Canvas>
         </div>
     )
