@@ -21,6 +21,7 @@ interface StlExporterProps {
 }
 
 export function StlExporter({ product, textConfig, onExported }: StlExporterProps) {
+    console.log("Exporter received:", product.name, product.model);
     const { scene } = useGLTF(product.model);
     const { scene: threeScene } = useThree();
     const [isExporting, setIsExporting] = useState(false);

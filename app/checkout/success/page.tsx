@@ -48,10 +48,7 @@ export default function CheckoutSuccessPage() {
                 {/* HIDDEN CANVASES FOR GENERATION */}
                 <div className="fixed top-0 left-0 w-1 h-1 opacity-0 pointer-events-none overflow-hidden">
                     {items.map((item, index) => {
-                        // Sequential generation logic could be added here to avoid browser lag,
-                        // but for simplicity we render all. Ideally, we mount one, wait for callback, mount next.
-                        // Let's rely on React concurrency for now or basic rendering.
-
+                        console.log("Checkout Item:", item.name, "Model Path:", item.model);
                         return (
                             <Canvas key={item.id} gl={{ preserveDrawingBuffer: true }}>
                                 <StlExporter
